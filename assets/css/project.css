@@ -1,6 +1,14 @@
 #header {
     background-color:teal;
-    text-align: center;
+   
+
+}
+h1 {
+    font-size: 35px;
+    float: left;
+}
+img {
+    float: right;
 }
 
 h1 {
