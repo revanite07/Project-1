@@ -1,9 +1,9 @@
 var map;
 var markers;
 
-$(document).ready({
+$(document).ready(function() {
     initializeMap();
-    console.log("hi");
+    console.log("hello");
 });
 
 
