@@ -38,12 +38,26 @@
             </form>
         </div>
     </nav>
-</br>
+    </br>
     <div class="card-panel">
-            <span class="blue-text text-darken-2">Put in the zip code of city you would like to see the crime stats for</span>
-          </div>
+        <div class="card-panel bluelighten-2">Put in the zip code of city you would like to see the crime stats for</div>
+    </div>
     </br>
     <div id="map"></div>
+
+    <div class="row">
+            <div class="col s12 m6">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">Crime Stats</span>
+                  <p id="stats">Different Crime Stats underneath the map</p>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+
     <footer class="page-footer">
         <div class="container">
             <div class="row">
@@ -54,9 +68,21 @@
                 </div>
             </div>
     </footer>
-
+    <script type="text/javascript" src="assets/javascript/project.js"></script>
     <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
-    <script src="assets/javascript/project.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCM8_R217qUU0-Ixun3qmvnfF7llgnpbLg",
+            authDomain: "crime-data-project-3df45.firebaseapp.com",
+            databaseURL: "https://crime-data-project-3df45.firebaseio.com",
+            projectId: "crime-data-project-3df45",
+            storageBucket: "crime-data-project-3df45.appspot.com",
+            messagingSenderId: "208074788752"
+        };
+        firebase.initializeApp(config);
+    </script>
 </body>
 
 </html>
