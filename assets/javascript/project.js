@@ -56,3 +56,7 @@ function mapCrimeData(data) {
 function displayCrimeData(data) {
     var crimeDataDiv = $('#stats');
 }
+
+$('.dropdown-trigger').dropdown();
+$('#textarea1').val('');
+M.textareaAutoResize($('#textarea1'));
