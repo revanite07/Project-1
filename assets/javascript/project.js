@@ -60,3 +60,16 @@ function displayCrimeData(data) {
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
+
+
+
+/*
+var p = $('<p>')
+var stats = $('#stats')
+
+
+
+
+
+
+*/
