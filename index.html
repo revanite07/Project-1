@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Crime Stats</title>
-    <script src="app.js"></script>
+    <!--Links for css, JS, and leaflet-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
@@ -40,7 +40,13 @@
             </form>
         </div>
     </nav>
+</br>
+    <div class="card-panel">
+            <span class="blue-text text-darken-2">Put in the zip code of city you would like to see the crime stats for</span>
+          </div>
     </br>
+
+    <div id="map"></div>
     <div id="map"></div>
     <footer class="page-footer">
         <div class="container">
@@ -54,19 +60,6 @@
     </footer>
 
     <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCM8_R217qUU0-Ixun3qmvnfF7llgnpbLg",
-            authDomain: "crime-data-project-3df45.firebaseapp.com",
-            databaseURL: "https://crime-data-project-3df45.firebaseio.com",
-            projectId: "crime-data-project-3df45",
-            storageBucket: "crime-data-project-3df45.appspot.com",
-            messagingSenderId: "208074788752"
-        };
-        firebase.initializeApp(config);
-    </script>
 </body>
 
 </html>
