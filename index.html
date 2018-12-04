@@ -20,6 +20,9 @@
     <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
         crossorigin=""></script>
     <link rel="stylesheet" href="assets/css/project.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -32,10 +35,26 @@
     <nav>
         <div class="nav-wrapper">
             <form>
-                <div class="input-field">
-                    <input id="search" type="search" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Date of Crime MM/DD/YYYY</label>
+                  </div>
+                <div class="dropdown">
+                    <!-- Dropdown Trigger -->
+                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Crime Types
+                    </a>
+
+                    <!-- Dropdown Structure -->
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="#!">Battery/624</a></li>
+                        <li><a href="#!">Burglary/310</a></li>
+                        <li><a href="#!">Vehicle-Stolen/510</a></li>
+                        <li><a href="#!">Petty Theft/440</a></li>
+                        <li><a href="#!">Identity Theft/354</a></li>
+                        <li><a href="#!">Aggravated Assault/230</a></li>
+                        <li><a href="#!">Robbery/210</a></li>
+                        <li><a href="#!">Arson/648</a></li>
+                    </ul>
                 </div>
             </form>
         </div>
@@ -43,8 +62,13 @@
     </br>
     <div class="card-panel">
         <div class="card-panel bluelighten-2">Put in the zip code of city you would like to see the crime stats for</div>
+
+    </br>
+    <div class="card-panel">
+        <span class="blue-text text-darken-2">Click the crime description/code for the type you would like to see!</span>
     </div>
     </br>
+
 
     <div id="map"></div>
 
