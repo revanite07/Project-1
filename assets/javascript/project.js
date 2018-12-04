@@ -1,11 +1,13 @@
 var map;
 var markers;
+var inputDate;
 
 $(document).ready(function() {
     initializeMap();
-    console.log("hello");
+    var date = formatUserInputDate("22112010");
+    console.log(date);
+    getCrimeData(date);
 });
-
 
 function initializeMap() {
   map = L.map('map', {
@@ -18,6 +20,13 @@ function initializeMap() {
   }).addTo(map);
 }
 
+function formatUserInputDate(string) {
+    string = string.replace(/\D/g,'');
+    var day = moment(string, ["MMDDYYYY", "DDMMYYYY"]);
+    day = day.format('YYYY-MM-DD');
+    return day.toString();
+}
+
 function getCrimeData(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
@@ -28,11 +37,11 @@ function getCrimeData(date) {
   }).done(function(data) {
     alert("Retrieved " + data.length + " records from the dataset!");
     console.log(data);
-    markCrimeData(data);
+    mapCrimeData(data);
   });
 }
 
-function markCrimeData(data) {
+function mapCrimeData(data) {
   markers = L.layerGroup([]);
   for(var i=0; i<data.length; i++) {
     console.log();
@@ -42,4 +51,8 @@ function markCrimeData(data) {
     marker.addTo(markers);
   }
   markers.addTo(map);
+}
+
+function displayCrimeData(data) {
+    var crimeDataDiv = $('#stats');
 }
