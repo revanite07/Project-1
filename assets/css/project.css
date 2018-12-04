@@ -3,6 +3,15 @@
     text-align: center;
 }
 
+h1 {
+    font-size: 40px;
+    float: left;
+}
+
+img {
+    float: right;
+}
+
 .page-footer {
     background-color: teal;
 }
