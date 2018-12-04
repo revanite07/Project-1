@@ -1,8 +1,10 @@
 var map;
 var markers;
 
-initializeMap();
-
+$(document).ready({
+    initializeMap();
+    console.log("hi");
+});
 
 
 function initializeMap() {
