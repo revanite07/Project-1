@@ -41,3 +41,6 @@ function markCrimeData(data) {
   }
   markers.addTo(map);
 }
+
+$('.dropdown-trigger').dropdown();
+ 
