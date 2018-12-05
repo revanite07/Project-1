@@ -10,10 +10,10 @@ $(document).ready(function() {
     $('#userInput').click(function() {
       var date = formatUserInputDate($('.datepicker').val());
       var code = $('#dropDownMenu option:selected').val();
-      var crimeDataDiv = $("#stats")
+      
       
       handleUserInput(code, date);
-      crimeDataDiv.append("<p>" + code, date + "</p>")
+      
 
 
     });
@@ -63,7 +63,6 @@ function getCrimeDataDate(date) {
   }).done(function(data) {
     results = data;
     mapCrimeData(data);
-    firebase.database().ref().set(data);
   });
 }
 function getCrimeDataCrime(crmCD) {
@@ -77,7 +76,6 @@ function getCrimeDataCrime(crmCD) {
       results = data;
       alert("Retrieved " + data.length + " records from the dataset!");
       mapCrimeData(data);
-      firebase.database().ref().set(data);
     });
   }
   
@@ -93,7 +91,6 @@ function getCrimeDataDateAndCode(date, crmCD) {
         alert("Retrieved " + data.length + " records from the dataset!");
         console.log(data)
         mapCrimeData(data);
-        firebase.database().ref().set(data);
     });
 }
 function mapCrimeData(data) {
@@ -107,11 +104,16 @@ function mapCrimeData(data) {
     var marker = L.marker([lat, lon]);
     marker.alt = i;
     marker.on("click", function() {
-        var newDiv = $('<div>');
-        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
-        $('#stats').append(newDiv);
-        
-     
+    //Change this part here
+    var newDiv = $('<div>');
+    newDiv.html("Area Name: " + data[this.alt]["area_name"]
+    + "<br>Location: " + data[this.alt]["location"] 
+    + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+    + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
+    + "<br>Premise Description: " + data[this.alt]["premis_desc"] 
+    + "<br><br>");
+    $('#stats').html(newDiv);
+    //Change this part here
     });
     marker.addTo(markers);
   }
