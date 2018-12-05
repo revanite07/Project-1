@@ -8,6 +8,10 @@ $(document).ready(function() {
     var date = formatUserInputDate("22112010");
     getCrimeDataDate(date);
     $('select').formSelect();
+    $('.datepicker').datepicker();
+    $('#userInput').click(function() {
+      console.log($('select option:selected').val());
+    })
 });
 
 function initializeMap() {
@@ -92,4 +96,7 @@ function mapCrimeData(data) {
   markers.addTo(map);
 }
 
-$('.dropdown-trigger').dropdown();
+
+
+
+
