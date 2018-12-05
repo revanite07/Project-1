@@ -7,12 +7,10 @@ $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
     getCrimeDataDate(date);
+    $('select').formSelect();
 });
 
 
-$(document).ready(function(){
-  $('select').formSelect();
-});
 
 function initializeMap() {
   map = L.map('map', {
@@ -101,15 +99,9 @@ $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
 
-console.log($('#myselect').val());
-
-
-
-$('#dropDownMenu').change(function(){
-    console.log($(this).find(':selected').text());
-    console.log($(this).find(':selected').val());
-});
-
+$('#userInput').click(function() {
+  console.log($('select option:selected').val());
+})
 
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
@@ -123,3 +115,4 @@ $("#crime-button").on('click', function() {
    ;
    $(".z-depth-3").append("Hello");
 })
+
