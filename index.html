@@ -45,44 +45,22 @@
 
              </div>
     </nav>
-    <form action="#">
-        <p>
-            <label>
-                <input name="group1" type="radio" />
-                <span value="624">Battery</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio" />
-                <span value="310">Burglary</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input class="with-gap" name="group1" type="radio" />
-                <span value="510">Grand Theft Auto</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio"  />
-                <span value="230">Aggravated Assault</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio" />
-                <span value="210">Robbery</span>
-            </label>
-        </p>
-        <p>
-            <label>
-                <input name="group1" type="radio"  />
-                <span value="648">Arson</span>
-            </label>
-        </p>
-    </form>
+    
+    <div class="input-field col s12">
+            <select id="dropDownMenu">
+              <option value="" disabled selected>Select Crime</option>
+              <option value="624">Battery</option>
+              <option value="310">Burglary</option>
+              <option value="510">Grand Theft Auto</option>
+              <option value="440">Petty Theft</option>
+              <option value="354">Identity Theft</option>
+              <option value="230">Aggravated Assault</option>
+              <option value="210">Robbery</option>
+              <option value="648">Arson</option>
+            </select>
+        
+          </div>
+   
     <button id="userInput" class="btn waves-effect waves-light" name="action">Submit
         <i class="material-icons right">send</i>
     </button>

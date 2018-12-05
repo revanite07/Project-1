@@ -5,7 +5,7 @@ var inputDate;
 $(document).ready(function(){
   $('select').formSelect();
 });
-
+var database = firebase.database().ref();
 var database = firebase.database();
 
 $(document).ready(function() {
@@ -70,6 +70,7 @@ function getCrimeDataDateAndCode(date, crmCD) {
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
         }
     }).done(function(data) {
+        results = data;
         alert("Retrieved " + data.length + " records from the dataset!");
         mapCrimeData(data);
         firebase.database().ref().set(data);
@@ -85,6 +86,9 @@ function mapCrimeData(data) {
     var marker = L.marker([lat, lon]);
     marker.on("click", function() {
         displayCrimeData(i);
+        var newDiv = $('<div>');
+        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
+        $('#stats').prepend(newDiv);
     });
     marker.addTo(markers);
   }
@@ -95,20 +99,23 @@ $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
+//var text = $("#dropDownMenu").find('optionselected').val();
+
 function displayCrimeData(data) {
     var crimeDataDiv = $('#stats');
-   // $("#userInput").on('click', function() {
-     // crimeDataDiv.append("<p>hello</p>");
+   $("#userInput").on('click', function() {
+      crimeDataDiv.append("<p>hello</p>");
       
-   // })
+    })
     function displayCrimeData(i) {
     var location;
 }
 }
 
 $(function(){
-  $("#userInput").click(function(){        
-      console.log($('input[name=group1]').val());
+  $("#userInput").click(function(){  
+    var text = $("#dropDownMenu").val();      
+      console.log(text);
   });
 });
 
