@@ -2,21 +2,16 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
-
 $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
     getCrimeDataDate(date);
     $('select').formSelect();
-
-
-
     $('.datepicker').datepicker();
     $('#userInput').click(function() {
       console.log($('select option:selected').val());
     })
 });
-
 function initializeMap() {
   map = L.map('map', {
     center: [34.0522, -118.2437],
@@ -27,14 +22,12 @@ function initializeMap() {
       maxZoom: 18
   }).addTo(map);
 }
-
 function formatUserInputDate(string) {
     string = string.replace(/\D/g,'');
     var day = moment(string, ["MMDDYYYY", "DDMMYYYY"]);
     day = day.format('YYYY-MM-DD');
     return day.toString();
 }
-
 function getCrimeDataDate(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
@@ -49,7 +42,6 @@ function getCrimeDataDate(date) {
     firebase.database().ref().set(data);
   });
 }
-
 function getCrimeDataCrime(crmCD) {
     $.ajax({
       url: "https://data.lacity.org/resource/7fvc-faax.json?crm_cd=" + crmCD,
@@ -65,7 +57,6 @@ function getCrimeDataCrime(crmCD) {
     });
   }
   
-
 function getCrimeDataDateAndCode(date, crmCD) {
     $.ajax({
         url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000&crm_cd=" + crmCD,
@@ -80,8 +71,6 @@ function getCrimeDataDateAndCode(date, crmCD) {
         firebase.database().ref().set(data);
     });
 }
-
-
 function mapCrimeData(data) {
   markers = L.layerGroup([]);
   for(var i=0; i<data.length; i++) {
@@ -99,32 +88,20 @@ function mapCrimeData(data) {
   markers.addTo(map);
 }
 
-<<<<<<< HEAD
-$('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));
-
-
 $('#userInput').click(function() {
-  console.log($('select option:selected').val());
-})
-
-$('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));
-function displayCrimeData(data) {
-    var crimeDataDiv = $('#stats');
-}
-
-$("#crime-button").on('click', function() {
-   console.log("lets work");
-   ;
-   $(".z-depth-3").append("Hello");
-})
-
-=======
-
-
-
-
->>>>>>> 002ab3032abf17b3ff11719410a4f3a30d7997b2
+  var crime = $('select option:selected').val();
+    $("#stats").append("<p>" + crime + "</p>");
+   
+    console.log($('select option:selected').val());
+    console.log(crime);
+  })
+  $('.dropdown-trigger').dropdown();
+  $('#textarea1').val('');
+  M.textareaAutoResize($('#textarea1'));
+  function displayCrimeData(data) {
+      var crimeDataDiv = $('#stats');
+      var crmCD = $('select option:selected').val();
+      function displayCrimeData(i) {
+      var location;
+  }
+  }
