@@ -61,7 +61,6 @@ function getCrimeDataDate(date) {
   }).done(function(data) {
     results = data;
     mapCrimeData(data);
-    firebase.database().ref().set(data);
   });
 }
 
@@ -76,7 +75,6 @@ function getCrimeDataCrime(crmCD) {
       results = data;
       alert("Retrieved " + data.length + " records from the dataset!");
       mapCrimeData(data);
-      firebase.database().ref().set(data);
     });
   }
   
@@ -92,7 +90,6 @@ function getCrimeDataDateAndCode(date, crmCD) {
         results = data;
         alert("Retrieved " + data.length + " records from the dataset!");
         mapCrimeData(data);
-        firebase.database().ref().set(data);
     });
 }
 
@@ -108,9 +105,14 @@ function mapCrimeData(data) {
     var marker = L.marker([lat, lon]);
     marker.alt = i;
     marker.on("click", function() {
-        var newDiv = $('<div>');
-        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
-        $('#stats').append(newDiv);
+    //Change this part here
+    var newDiv = $('<div>');
+    newDiv.html("Area Name: " + data[this.alt]["area_name"]
+    + "<br>Location: " + data[this.alt]["location"] 
+    + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+    + "<br> ");
+    $('#stats').prepend(newDiv);
+    //Change this part here
     });
     marker.addTo(markers);
   }
