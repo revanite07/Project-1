@@ -8,6 +8,10 @@ $(document).ready(function(){
 var database = firebase.database().ref();
 var database = firebase.database();
 
+$(document).ready(function(){
+  $('.datepicker').datepicker();
+});
+
 $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
@@ -40,7 +44,6 @@ function getCrimeDataDate(date) {
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }
   }).done(function(data) {
-    alert("Retrieved " + data.length + " records from the dataset!");
     mapCrimeData(data);
     console.log(data);
     firebase.database().ref().set(data);
@@ -55,7 +58,6 @@ function getCrimeDataCrime(crmCD) {
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
       }
     }).done(function(data) {
-      alert("Retrieved " + data.length + " records from the dataset!");
       mapCrimeData(data);
       firebase.database().ref().set(data);
     });
@@ -71,7 +73,6 @@ function getCrimeDataDateAndCode(date, crmCD) {
         }
     }).done(function(data) {
         results = data;
-        alert("Retrieved " + data.length + " records from the dataset!");
         mapCrimeData(data);
         firebase.database().ref().set(data);
     });
@@ -99,19 +100,38 @@ $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
-//var text = $("#dropDownMenu").find('optionselected').val();
+
+$('#userInput').click(function() {
+  displayCrimeData(data);
+  var crmCD = $('select option:selected').val();
+  $("#stats").append("<p>" + crmCD+ "</p>");
+ 
+  console.log($('select option:selected').val());
+  console.log(CrmCD);
+})
+
+$('.dropdown-trigger').dropdown();
+$('#textarea1').val('');
+M.textareaAutoResize($('#textarea1'));
 
 function displayCrimeData(data) {
     var crimeDataDiv = $('#stats');
    $("#userInput").on('click', function() {
       crimeDataDiv.append("<p>hello</p>");
-      
+      var crmCD = $('select option:selected').val();
+      crimeDataDiv =
     })
     function displayCrimeData(i) {
     var location;
 }
 }
 
-$('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));
+$("#crime-button").on('click', function() {
+  console.log("lets work");
+  ;
+  $(".z-depth-3").append("Hello");
+})
+
+
+
+
