@@ -1,5 +1,11 @@
+body,.crimeChoose {
+    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Rock Salt', cursive;
+    font-family: 'Black Ops One', cursive;
+    background-color: rgb(216, 215, 215);
+}
 #header {
-    background-color: navy;
+    background-color: rgb(22, 22, 155);
    
 
 }
@@ -20,12 +26,23 @@ h1 {
 img {
     float: right;
 }
+#sheriff{
+margin-bottom: 2%;
+}
 
 .page-footer {
-    background-color: teal;
+    background-color: rgb(22, 22, 155);
 }
 
 #map {
     height: 340px;
 }
+#stats {
+    background-color: rgb(22, 22, 155);
+    color: white;
+}
 
+#userInput {
+    margin-left: 1%;
+    background-color: rgb(22, 22, 155);
+}

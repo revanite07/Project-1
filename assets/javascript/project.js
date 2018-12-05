@@ -1,22 +1,22 @@
 var map;
 var markers;
 var inputDate;
-
-$(document).ready(function(){
-  $('select').formSelect();
-});
 var database = firebase.database().ref();
-var database = firebase.database();
-
-$(document).ready(function(){
-  $('.datepicker').datepicker();
-});
 
 $(document).ready(function() {
     initializeMap();
-    var date = formatUserInputDate("22112010");
-    getCrimeDataDate(date);
+    $('select').formSelect();
+    $('.datepicker').datepicker();
+  
+    $('#userInput').click(function() {
+      var date = formatUserInputDate($('.datepicker').val());
+      var code = $('#dropDownMenu option:selected').val();
+      handleUserInput(code, date);
+    });
 });
+
+
+
 
 function initializeMap() {
   map = L.map('map', {
@@ -29,9 +29,28 @@ function initializeMap() {
   }).addTo(map);
 }
 
+function handleUserInput(code, date) {
+  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+    getCrimeDataDateAndCode(date, code);
+  }
+  else if(date !== "" && date !== undefined && date !== null) {
+      getCrimeDataDate(date);
+  }
+  else if(code > 0) {
+    getCrimeDataCrime(code);
+  }
+  else {
+    alert("Error");
+  }
+}
+
+
 function formatUserInputDate(string) {
+  if(string === "" || string === null) {
+    return;
+  }
     string = string.replace(/\D/g,'');
-    var day = moment(string, ["MMDDYYYY", "DDMMYYYY"]);
+    var day = moment(string, "MMM DD YYYY");
     day = day.format('YYYY-MM-DD');
     return day.toString();
 }
@@ -40,13 +59,13 @@ function getCrimeDataDate(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
     data: {
-      "$limit" : 5000,
+      "$limit" : 500,
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }
   }).done(function(data) {
     mapCrimeData(data);
     console.log(data);
-    firebase.database().ref().set(data);
+    
   });
 }
 
@@ -54,12 +73,12 @@ function getCrimeDataCrime(crmCD) {
     $.ajax({
       url: "https://data.lacity.org/resource/7fvc-faax.json?crm_cd=" + crmCD,
       data: {
-        "$limit" : 5000,
+        "$limit" : 500,
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
       }
     }).done(function(data) {
       mapCrimeData(data);
-      firebase.database().ref().set(data);
+     
     });
   }
   
@@ -68,60 +87,73 @@ function getCrimeDataDateAndCode(date, crmCD) {
     $.ajax({
         url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000&crm_cd=" + crmCD,
         data: {
-        "$limit" : 5000,
+        "$limit" : 500,
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
         }
     }).done(function(data) {
         results = data;
         mapCrimeData(data);
-        firebase.database().ref().set(data);
+        console.log(data);
+       
     });
 }
 
 
 function mapCrimeData(data) {
+  if(markers !== null && markers !== undefined) {
+    markers.clearLayers();
+  }
   markers = L.layerGroup([]);
-  for(var i=0; i< data.length; i++) {
+  for(var i=0; i<data.length; i++) {
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
     var marker = L.marker([lat, lon]);
+    marker.alt = i;
     marker.on("click", function() {
-        displayCrimeData(i);
-        var newDiv = $('<div>');
-        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
-        $('#stats').prepend(newDiv);
+    //Change this part here
+    var newDiv = $('<div>');
+    newDiv.html("Area Name: " + data[this.alt]["area_name"]
+    + "<br>Location: " + data[this.alt]["location"] 
+    + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+    + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
+    + "<br>Premise Description: " + data[this.alt]["premis_desc"] 
+    + "<br><br><br> ");
+    $('#stats').html(newDiv);
+    //Change this part here
+    var newData = {
+      AreaName: data[this.alt]["area_name"],
+      Location: data[this.alt]["location"],
+      Crime: data[this.alt]["crm_cd_desc"],
+      DateOcc: data[this.alt]["date_occ"],
+      DateRptd: data[this.alt]["date_rptd"],
+      VictimAge: data[this.alt]["vict_age"],
+      VictimDescent: data[this.alt]["vict_descent"],
+      VictimSex: data[this.alt]["vict_sex"],
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+  } ;
+  var newPostKey = firebase.database().ref().child('posts').push().key;
+  var updates = {};
+  updates['/posts/' + newPostKey] = newData;
+  firebase.database().ref().update(updates);
     });
     marker.addTo(markers);
   }
   markers.addTo(map);
 }
+dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
+  // Change the HTML to reflect
+  $("#serach-counter").text(snapshot.val().data[this.alt]["area_name"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["location"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd_desc"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd"] );
+  $("#serach-counter").text(snapshot.val().data[this.alt]["premis_desc"] );
+});
+
 
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
-
-
-function displayCrimeData() {
-    var crimeDataDiv = $('#stats');
-    $('#userInput').click(function() {
-      var crime = $('select option:selected').val();
-        crimeDataDiv.append("<p>" + crime + "</p>");
-       
-        console.log($('select option:selected').val());
-        console.log(crime);
-      })
-    var crmCD = $('select option:selected').val();
-    function displayCrimeData(i) {
-    var location;
-}
-}
-
-$("#crime-button").on('click', function() {
-  console.log("lets work");
-  ;
-  $(".z-depth-3").append("Hello");
-})
 
 
 
