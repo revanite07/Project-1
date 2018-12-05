@@ -9,7 +9,9 @@ $(document).ready(function() {
     getCrimeDataDate(date);
     $('select').formSelect();
     $('.datepicker').datepicker();
+  
     $('#userInput').click(function() {
+      console.log(formatUserInputDate($('.datepicker').val()));
       console.log($('select option:selected').val());
     })
 });
@@ -27,7 +29,7 @@ function initializeMap() {
 
 function formatUserInputDate(string) {
     string = string.replace(/\D/g,'');
-    var day = moment(string, ["MMDDYYYY", "DDMMYYYY"]);
+    var day = moment(string, "MMM DD YYYY");
     day = day.format('YYYY-MM-DD');
     return day.toString();
 }
@@ -41,7 +43,6 @@ function getCrimeDataDate(date) {
     }
   }).done(function(data) {
     results = data;
-    alert("Retrieved " + data.length + " records from the dataset!");
     mapCrimeData(data);
     firebase.database().ref().set(data);
   });
