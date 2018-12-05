@@ -101,26 +101,17 @@ $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
 
-$('#userInput').click(function() {
-  displayCrimeData(data);
-  var crmCD = $('select option:selected').val();
-  $("#stats").append("<p>" + crmCD+ "</p>");
- 
-  console.log($('select option:selected').val());
-  console.log(CrmCD);
-})
 
-$('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));
-
-function displayCrimeData(data) {
+function displayCrimeData() {
     var crimeDataDiv = $('#stats');
-   $("#userInput").on('click', function() {
-      crimeDataDiv.append("<p>hello</p>");
-      var crmCD = $('select option:selected').val();
-      crimeDataDiv =
-    })
+    $('#userInput').click(function() {
+      var crime = $('select option:selected').val();
+        crimeDataDiv.append("<p>" + crime + "</p>");
+       
+        console.log($('select option:selected').val());
+        console.log(crime);
+      })
+    var crmCD = $('select option:selected').val();
     function displayCrimeData(i) {
     var location;
 }
