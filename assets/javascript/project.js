@@ -112,10 +112,6 @@ function displayCrimeData(data) {
 }
 }
 
-$(function(){
-  $("#userInput").click(function(){  
-    var text = $("#dropDownMenu").val();      
-      console.log(text);
-  });
-});
-
+$('.dropdown-trigger').dropdown();
+$('#textarea1').val('');
+M.textareaAutoResize($('#textarea1'));
