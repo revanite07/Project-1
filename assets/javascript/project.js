@@ -4,14 +4,32 @@ var inputDate;
 var database = firebase.database().ref();
 $(document).ready(function() {
     initializeMap();
-    var date = formatUserInputDate("22112010");
-    getCrimeDataDate(date);
     $('select').formSelect();
     $('.datepicker').datepicker();
+  
     $('#userInput').click(function() {
-      console.log($('select option:selected').val());
-    })
+      var date = formatUserInputDate($('.datepicker').val());
+      var code = $('#dropDownMenu option:selected').val();
+      handleUserInput(code, date);
+    });
 });
+
+function handleUserInput(code, date) {
+  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+    getCrimeDataDateAndCode(date, code);
+  }
+  else if(date !== "" && date !== undefined && date !== null) {
+    console.log(date);
+    getCrimeDataDate(date);
+  }
+  else if(code > 0) {
+    getCrimeDataCrime(code);
+  }
+  else {
+    alert("Error");
+  }
+}
+
 function initializeMap() {
   map = L.map('map', {
     center: [34.0522, -118.2437],
@@ -23,8 +41,11 @@ function initializeMap() {
   }).addTo(map);
 }
 function formatUserInputDate(string) {
+  if(string === "" || string === null) {
+    return;
+  }
     string = string.replace(/\D/g,'');
-    var day = moment(string, ["MMDDYYYY", "DDMMYYYY"]);
+    var day = moment(string, "MMM DD YYYY");
     day = day.format('YYYY-MM-DD');
     return day.toString();
 }
@@ -32,12 +53,11 @@ function getCrimeDataDate(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
     data: {
-      "$limit" : 5000,
+      "$limit" : 500,
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }
   }).done(function(data) {
     results = data;
-    alert("Retrieved " + data.length + " records from the dataset!");
     mapCrimeData(data);
     firebase.database().ref().set(data);
   });
@@ -46,7 +66,7 @@ function getCrimeDataCrime(crmCD) {
     $.ajax({
       url: "https://data.lacity.org/resource/7fvc-faax.json?crm_cd=" + crmCD,
       data: {
-        "$limit" : 5000,
+        "$limit" : 500,
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
       }
     }).done(function(data) {
@@ -61,7 +81,7 @@ function getCrimeDataDateAndCode(date, crmCD) {
     $.ajax({
         url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000&crm_cd=" + crmCD,
         data: {
-        "$limit" : 5000,
+        "$limit" : 500,
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
         }
     }).done(function(data) {
