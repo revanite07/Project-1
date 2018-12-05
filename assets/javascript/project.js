@@ -10,6 +10,10 @@ $(document).ready(function() {
     getCrimeDataDate(date);
 });
 
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 function initializeMap() {
   map = L.map('map', {
     center: [34.0522, -118.2437],
@@ -93,3 +97,11 @@ function displayCrimeData(i) {
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
+
+
+var text = $('#dropDownMenu').find('option:selected').val();
+
+$("#dropDownMenu").on('click', function(){
+console.log(text);
+
+})
