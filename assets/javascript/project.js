@@ -111,7 +111,7 @@ function mapCrimeData(data) {
     + "<br>Location: " + data[this.alt]["location"] 
     + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
     + "<br> ");
-    $('#stats').prepend(newDiv);
+    $('#stats').html(newDiv);
     //Change this part here
     });
     marker.addTo(markers);
