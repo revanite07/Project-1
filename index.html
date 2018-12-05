@@ -35,31 +35,46 @@
     </br>
     <nav>
         <div class="nav-wrapper">
-            <form>
-                <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Date of Crime MM/DD/YYYY</label>
-                </div>
 
-                <div id="dropDownMenu" class="input-field col s12">
-                        <select>
-                          <!-- <option value="" disabled selected>Choose your option</option> -->
-                          <option value="624">Burglary</option>
-                          <option value="310">Assaultg</option>
-                          <option value="">Option 3</option>
-                        </select>
-                        <label>Materialize Select</label>
-                      </div>
-
-
-                <button id="userInput" class="btn waves-effect waves-light" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>
-
+            <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Date of Crime MM/DD/YYYY</label>
+            </div>
         </div>
     </nav>
+    <form>
+            <p>
+                <label>
+                    <input name="group1" type="radio" checked />
+                    <span>Red</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="group1" type="radio" />
+                    <span>Yellow</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="with-gap" name="group1" type="radio" />
+                    <span>Green</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="group1" type="radio" disabled="disabled" />
+                    <span>Brown</span>
+                </label>
+            </p>
+
+
+            <button id="userInput" class="btn waves-effect waves-light" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
     </br> </br> </br> </br> </br>
+
     <div class="card-panel">
         <div class="card-panel bluelighten-2">Time</div>
         <div class="card-panel bluelighten-2">Put in the zip code of city you would like to see the crime stats for</div>
@@ -77,7 +92,7 @@
     <div id="map"></div>
 
     <div class="col s12 m2" id="stats">
-        <p class="z-depth-3">crime stats go here</p>
+        <p class="z-depth-3">Crime stats go here</p>
 
 
         <footer class="page-footer">

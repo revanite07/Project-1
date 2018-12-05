@@ -105,3 +105,15 @@ $("#dropDownMenu").on('click', function(){
 console.log(text);
 
 })
+$('.dropdown-trigger').dropdown();
+$('#textarea1').val('');
+M.textareaAutoResize($('#textarea1'));
+function displayCrimeData(data) {
+    var crimeDataDiv = $('#stats');
+}
+
+$("#crime-button").on('click', function() {
+   console.log("lets work");
+   ;
+   $(".z-depth-3").append("Hello");
+})
