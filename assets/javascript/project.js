@@ -60,7 +60,14 @@ function displayCrimeData(data) {
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
+$('select').formSelect();
 
+console.log($("select option:selected").val())
+
+/*$('option').on('click', function(){
+  $(this).attr("value")
+  console.log('value')
+})
 
 
 /*

@@ -40,7 +40,23 @@
                     <textarea id="textarea1" class="materialize-textarea"></textarea>
                     <label for="textarea1">Date of Crime MM/DD/YYYY</label>
                 </div> 
-                <div id="buttons">
+
+
+                <div class="input-field col s12">
+                    <select>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="624">Battery</option>
+                      <option value="310">Burglary</option>
+                      <option value="510">Vehicle-Stolen</option>
+                      <option value="440">Petty Theft</option>
+                      <option value="354">Identity Theft</option>
+                      <option value="230">Aggravated Assault</option>
+                      <option value="210">Robbery</option>
+                      <option value="648">Arson</option>
+                    </select>
+                    <label>Crime Type</label>
+                  </div>
+                <!--<div id="buttons">
                     <a class="waves-effect waves-light btn">Battery/624</a>
                     <a class="waves-effect waves-light btn">Burglary/310</a>
                     <a class="waves-effect waves-light btn">Vehicle-Stolen/510</a>
@@ -50,9 +66,9 @@
                     <a class="waves-effect waves-light btn">Robbery/210</a>
                     <a class="waves-effect waves-light btn">Arson/648</a>
 
-                </div>
+                </div> 
                 
-                    <!-- Dropdown Trigger 
+                     Dropdown Trigger 
                         <div class="dropdown">
                     <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Crime Types
                     </a>
