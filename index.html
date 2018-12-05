@@ -27,73 +27,33 @@
 
 <body>
     <div class="row">
-        <div class="col s12" id="header"><span class="flow-text">
+        <div class="col s12" id="header">
+            <span class="flow-text">
                 <h1>Where Da Crime @</h1>
-                <img src="assets/images/Seal_of_Los_Angeles_County,_California.svg.png" height="120" width="120" />
-            </span></div>
+                <img src="assets/images/Seal_of_Los_Angeles_County,_California.svg.png" height="120" width="120"/>
+            </span>
+        </div>
+            <button id="userInput" class="btn waves-effect waves-light" name="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
     </div>
     </br>
-    <nav>
-        <div class="nav-wrapper">
-            <form>
-                <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Date of Crime MM/DD/YYYY</label>
-                </div> 
-
-
-                <div class="input-field col s12">
-                    <select>
-                      <option value="" disabled selected>Choose your option</option>
-                      <option value="624">Battery</option>
-                      <option value="310">Burglary</option>
-                      <option value="510">Vehicle-Stolen</option>
-                      <option value="440">Petty Theft</option>
-                      <option value="354">Identity Theft</option>
-                      <option value="230">Aggravated Assault</option>
-                      <option value="210">Robbery</option>
-                      <option value="648">Arson</option>
-                    </select>
-                    <label>Crime Type</label>
-                  </div>
-                <!--<div id="buttons">
-                    <a class="waves-effect waves-light btn">Battery/624</a>
-                    <a class="waves-effect waves-light btn">Burglary/310</a>
-                    <a class="waves-effect waves-light btn">Vehicle-Stolen/510</a>
-                    <a class="waves-effect waves-light btn">Petty Theft/440</a>
-                    <a class="waves-effect waves-light btn">Identity Theft/354</a>
-                    <a class="waves-effect waves-light btn">Aggravated Assault/230</a>
-                    <a class="waves-effect waves-light btn">Robbery/210</a>
-                    <a class="waves-effect waves-light btn">Arson/648</a>
-
-                </div> 
-                
-                     Dropdown Trigger 
-                        <div class="dropdown">
-                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Crime Types
-                    </a>
-
-                    Dropdown Structure 
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li><a href="#!">Battery/624</a></li>
-                        <li><a href="#!">Burglary/310</a></li>
-                        <li><a href="#!">Vehicle-Stolen/510</a></li>
-                        <li><a href="#!">Petty Theft/440</a></li>
-                        <li><a href="#!">Identity Theft/354</a></li>
-                        <li><a href="#!">Aggravated Assault/230</a></li>
-                        <li><a href="#!">Robbery/210</a></li>
-                        <li><a href="#!">Arson/648</a></li>
-                    </ul>
-                </div> -->
-
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>
-
+    <div class="row">
+        <div class="input-field col s12">
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Materialize Select</label>
+            <input type="text" class="datepicker">
+            <button id="userInput" class="btn waves-effect waves-light" name="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
         </div>
-    </nav>
-    </br> </br> </br> </br> </br>
+    </div>
+    </br>
     <div class="card-panel">
         <div class="card-panel bluelighten-2">Time</div>
         <div class="card-panel bluelighten-2">Put in the zip code of city you would like to see the crime stats for</div>
@@ -106,39 +66,43 @@
 
     </br>
     <div id="map"></div>
-
-    <div class="col s12 m2" id="stats">
-            <h2 class="z-depth-3">Crime Stats</h2>
-
-
-            <footer class="page-footer">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col l6 s12">
-                            <h5 class="white-text">Creme Bru Leezee</h5>
-                            <p class="grey-text text-lighten-4">James Cho, Calum Ragan, Kelan Moffatt, and Alvin Garcia</p>
-                        </div>
-                    </div>
-            </footer>
-            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                crossorigin="anonymous"></script>
-            <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
-            <script src="assets/javascript/moment.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
-            <script>
-                // Initialize Firebase
-                var config = {
-                    apiKey: "AIzaSyCM8_R217qUU0-Ixun3qmvnfF7llgnpbLg",
-                    authDomain: "crime-data-project-3df45.firebaseapp.com",
-                    databaseURL: "https://crime-data-project-3df45.firebaseio.com",
-                    projectId: "crime-data-project-3df45",
-                    storageBucket: "crime-data-project-3df45.appspot.com",
-                    messagingSenderId: "208074788752"
-                };
-                firebase.initializeApp(config);
-            </script>
-            <script src="assets/javascript/project.js"></script>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Crime Stats</span>
+                <div id="stats">Different Crime Stats underneath the map</div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Creme Bru Leezee</h5>
+                    <p class="grey-text text-lighten-4">James Cho, Calum Ragan, Kelan Moffatt, and Alvin Garcia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
+    <script src="assets/javascript/moment.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyA9U3uJzfwNkMhwvMj-RkDO-dd3pGmkTkY",
+          authDomain: "crimemapper-70b0b.firebaseapp.com",
+          databaseURL: "https://crimemapper-70b0b.firebaseio.com",
+          projectId: "crimemapper-70b0b",
+          storageBucket: "crimemapper-70b0b.appspot.com",
+          messagingSenderId: "724595862041"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="assets/javascript/project.js"></script>
 </body>
 
 </html>

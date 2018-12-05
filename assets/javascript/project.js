@@ -1,12 +1,13 @@
 var map;
 var markers;
 var inputDate;
+var database = firebase.database().ref();
 
 $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
-    console.log(date);
-    getCrimeData(date);
+    getCrimeDataDate(date);
+    $('select').formSelect();
 });
 
 function initializeMap() {
@@ -27,7 +28,7 @@ function formatUserInputDate(string) {
     return day.toString();
 }
 
-function getCrimeData(date) {
+function getCrimeDataDate(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
     data: {
@@ -35,48 +36,60 @@ function getCrimeData(date) {
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }
   }).done(function(data) {
+    results = data;
     alert("Retrieved " + data.length + " records from the dataset!");
-    console.log(data);
     mapCrimeData(data);
+    firebase.database().ref().set(data);
   });
 }
+
+function getCrimeDataCrime(crmCD) {
+    $.ajax({
+      url: "https://data.lacity.org/resource/7fvc-faax.json?crm_cd=" + crmCD,
+      data: {
+        "$limit" : 5000,
+        "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
+      }
+    }).done(function(data) {
+      results = data;
+      alert("Retrieved " + data.length + " records from the dataset!");
+      mapCrimeData(data);
+      firebase.database().ref().set(data);
+    });
+  }
+  
+
+function getCrimeDataDateAndCode(date, crmCD) {
+    $.ajax({
+        url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000&crm_cd=" + crmCD,
+        data: {
+        "$limit" : 5000,
+        "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
+        }
+    }).done(function(data) {
+        results = data;
+        alert("Retrieved " + data.length + " records from the dataset!");
+        mapCrimeData(data);
+        firebase.database().ref().set(data);
+    });
+}
+
 
 function mapCrimeData(data) {
   markers = L.layerGroup([]);
   for(var i=0; i<data.length; i++) {
-    console.log();
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
     var marker = L.marker([lat, lon]);
+    marker.alt = i;
+    marker.on("click", function() {
+        var newDiv = $('<div>');
+        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
+        $('#stats').prepend(newDiv);
+    });
     marker.addTo(markers);
   }
   markers.addTo(map);
 }
 
-function displayCrimeData(data) {
-    var crimeDataDiv = $('#stats');
-}
-
 $('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));
-$('select').formSelect();
-
-console.log($("select option:selected").val())
-
-/*$('option').on('click', function(){
-  $(this).attr("value")
-  console.log('value')
-})
-
-
-/*
-var p = $('<p>')
-var stats = $('#stats')
-
-
-
-
-
-
-*/
