@@ -28,4 +28,8 @@ img {
 #map {
     height: 340px;
 }
+#stats {
+    background-color: navy;
+    color: grey;
+}
 
