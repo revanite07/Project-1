@@ -7,11 +7,16 @@ $(document).ready(function() {
     initializeMap();
     $('select').formSelect();
     $('.datepicker').datepicker();
-  
     $('#userInput').click(function() {
       var date = formatUserInputDate($('.datepicker').val());
       var code = $('#dropDownMenu option:selected').val();
       handleUserInput(code, date);
+    });
+
+
+    database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {
+      // Change the HTML to reflect
+      
     });
 });
 
@@ -20,7 +25,7 @@ function handleUserInput(code, date) {
     getCrimeDataDateAndCode(date, code);
   }
   else if(date !== "" && date !== undefined && date !== null) {
-      getCrimeDataDate(date);
+    getCrimeDataDate(date);
   }
   else if(code > 0) {
     getCrimeDataCrime(code);
@@ -105,14 +110,28 @@ function mapCrimeData(data) {
     var marker = L.marker([lat, lon]);
     marker.alt = i;
     marker.on("click", function() {
-    //Change this part here
-    var newDiv = $('<div>');
-    newDiv.html("Area Name: " + data[this.alt]["area_name"]
-    + "<br>Location: " + data[this.alt]["location"] 
-    + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
-    + "<br> ");
-    $('#stats').prepend(newDiv);
-    //Change this part here
+      //Change this part here
+      var newDiv = $('<div>');
+      newDiv.html("Area Name: " + data[this.alt]["area_name"]
+      + "<br>Location: " + data[this.alt]["location"] 
+      + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+      + "<br> ");
+      $('#stats').prepend(newDiv);
+      var newData = {
+        AreaName: data[this.alt]["area_name"],
+        Location: data[this.alt]["location"],
+        Crime: data[this.alt]["crm_cd_desc"],
+        DateOcc: data[this.alt]["date_occ"],
+        DateRptd: data[this.alt]["date_rptd"],
+        VictimAge: data[this.alt]["vict_age"],
+        VictimDescent: data[this.alt]["vict_descent"],
+        VictimSex: data[this.alt]["vict_sex"],
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+    } ;
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+    var updates = {};
+    updates['/posts/' + newPostKey] = newData;
+    firebase.database().ref().update(updates);
     });
     marker.addTo(markers);
   }
