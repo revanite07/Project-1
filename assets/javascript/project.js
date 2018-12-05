@@ -10,7 +10,12 @@ $(document).ready(function() {
     $('#userInput').click(function() {
       var date = formatUserInputDate($('.datepicker').val());
       var code = $('#dropDownMenu option:selected').val();
+      var crimeDataDiv = $("#stats")
+      
       handleUserInput(code, date);
+      crimeDataDiv.append("<p>" + code, date + "</p>")
+
+
     });
 });
 
@@ -86,6 +91,7 @@ function getCrimeDataDateAndCode(date, crmCD) {
     }).done(function(data) {
         results = data;
         alert("Retrieved " + data.length + " records from the dataset!");
+        console.log(data)
         mapCrimeData(data);
         firebase.database().ref().set(data);
     });
@@ -104,26 +110,28 @@ function mapCrimeData(data) {
         var newDiv = $('<div>');
         newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
         $('#stats').append(newDiv);
+        
+     
     });
     marker.addTo(markers);
   }
   markers.addTo(map);
 }
 
-$('#userInput').click(function() {
-  var crime = $('select option:selected').val();
-    $("#stats").append("<p>" + crime + "</p>");
+// $('#userInput').click(function() {
+//   var crime = $('select option:selected').val();
+//     $("#stats").append("<p>" + crime + "</p>");
    
-    console.log($('select option:selected').val());
-    console.log(crime);
-  })
-  $('.dropdown-trigger').dropdown();
-  $('#textarea1').val('');
-  M.textareaAutoResize($('#textarea1'));
-  function displayCrimeData(data) {
-      var crimeDataDiv = $('#stats');
-      var crmCD = $('select option:selected').val();
-      function displayCrimeData(i) {
-      var location;
-  }
-  }
+//     console.log($('select option:selected').val());
+//     console.log(crime);
+//   })
+//   $('.dropdown-trigger').dropdown();
+//   $('#textarea1').val('');
+//   M.textareaAutoResize($('#textarea1'));
+//   function displayCrimeData(data) {
+//       var crimeDataDiv = $('#stats');
+//       var crmCD = $('select option:selected').val();
+//       function displayCrimeData(i) {
+//       var location;
+  // }
+  // }
