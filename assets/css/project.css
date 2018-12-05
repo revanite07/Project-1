@@ -1,12 +1,22 @@
 #header {
-    background-color:teal;
+    background-color: navy;
    
 
 }
 h1 {
     font-size: 35px;
     float: left;
+    color: yellow;
 }
+img {
+    float: right;
+}
+
+h1 {
+    font-size: 40px;
+    float: left;
+}
+
 img {
     float: right;
 }
