@@ -7,6 +7,7 @@ $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
     getCrimeDataDate(date);
+    $('select').formSelect();
 });
 
 function initializeMap() {
@@ -92,5 +93,3 @@ function mapCrimeData(data) {
 }
 
 $('.dropdown-trigger').dropdown();
-$('#textarea1').val('');
-M.textareaAutoResize($('#textarea1'));

@@ -25,72 +25,57 @@
 
 <body>
     <div class="row">
-        <div class="col s12" id="header"><span class="flow-text">
+        <div class="col s12" id="header">
+            <span class="flow-text">
                 <h1>Where Da Crime @</h1>
                 <img src="assets/images/Seal_of_Los_Angeles_County,_California.svg.png" height="120" width="120"/>
-            </span></div>
+            </span>
+        </div>
+            <button id="userInput" class="btn waves-effect waves-light" name="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
     </div>
     </br>
-    <nav>
-        <div class="nav-wrapper">
-            <form>
-                <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Date of Crime MM/DD/YYYY</label>
-                </div>
-                <div class="dropdown">
-                    <!-- Dropdown Trigger -->
-                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Crime Types
-                    </a>
-
-                    <!-- Dropdown Structure -->
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li><a href="#!">Battery/624</a></li>
-                        <li><a href="#!">Burglary/310</a></li>
-                        <li><a href="#!">Vehicle-Stolen/510</a></li>
-                        <li><a href="#!">Petty Theft/440</a></li>
-                        <li><a href="#!">Identity Theft/354</a></li>
-                        <li><a href="#!">Aggravated Assault/230</a></li>
-                        <li><a href="#!">Robbery/210</a></li>
-                        <li><a href="#!">Arson/648</a></li>
-                    </ul>
-                </div>
-                <button id="userInput" class="btn waves-effect waves-light" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>
-
+    <div class="row">
+        <div class="input-field col s12">
+            <select>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Materialize Select</label>
+            <input type="text" class="datepicker">
+            <button id="userInput" class="btn waves-effect waves-light" name="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
         </div>
-    </nav>
+    </div>
     </br>
     <div class="card-panel">
         <div class="card-panel bluelighten-2">Time</div>
     </div>
     </br>
     <div id="map"></div>
-
     <div class="row">
-            <div class="col s12 m6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">Crime Stats</span>
-                  <div id="stats">Different Crime Stats underneath the map</div>
-                </div>
-                
-              </div>
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Crime Stats</span>
+                <div id="stats">Different Crime Stats underneath the map</div>
             </div>
-          </div>
-
-
+            </div>
+        </div>
+    </div>
     <footer class="page-footer">
         <div class="container">
             <div class="row">
-
                 <div class="col l6 s12">
                     <h5 class="white-text">Creme Bru Leezee</h5>
                     <p class="grey-text text-lighten-4">James Cho, Calum Ragan, Kelan Moffatt, and Alvin Garcia</p>
                 </div>
             </div>
+        </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
