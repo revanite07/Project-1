@@ -43,31 +43,20 @@
         </div>
     </nav>
     <form>
-            <p>
-                <label>
-                    <input name="group1" type="radio" checked />
-                    <span>Red</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input name="group1" type="radio" />
-                    <span>Yellow</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input class="with-gap" name="group1" type="radio" />
-                    <span>Green</span>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <input name="group1" type="radio" disabled="disabled" />
-                    <span>Brown</span>
-                </label>
-            </p>
-
+            <div class="input-field col s12">
+                    <select id ="dropDownMenu">
+                      <option value="" disabled selected>Choose Your Crime</option>
+                      <option value="624" data="624">Burglary</option>
+                      <option value="310" data="310">Battery</option>
+                      <option value="510" data="510">Vehicle-Stolen</option>
+                      <option value="440" data="440">Petty Theft</option>
+                      <option value="354" data="354">Identity Theft</option>
+                      <option value="230" data="230">Aggravated Assault</option>
+                      <option value="210" data="210">Robbery</option>
+                      <option value="648" data="648">Arson</option>
+                    </select>
+                    <label>Materialize Select</label>
+                  </div>
 
             <button id="userInput" class="btn waves-effect waves-light" name="action">Submit
                 <i class="material-icons right">send</i>

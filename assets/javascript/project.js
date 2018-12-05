@@ -1,14 +1,14 @@
 var map;
 var markers;
 var inputDate;
-
-var database = firebase.database();
+var database = firebase.database().ref();
 
 $(document).ready(function() {
     initializeMap();
     var date = formatUserInputDate("22112010");
     getCrimeDataDate(date);
 });
+
 
 $(document).ready(function(){
   $('select').formSelect();
@@ -40,6 +40,7 @@ function getCrimeDataDate(date) {
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }
   }).done(function(data) {
+    results = data;
     alert("Retrieved " + data.length + " records from the dataset!");
     mapCrimeData(data);
     firebase.database().ref().set(data);
@@ -54,6 +55,7 @@ function getCrimeDataCrime(crmCD) {
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
       }
     }).done(function(data) {
+      results = data;
       alert("Retrieved " + data.length + " records from the dataset!");
       mapCrimeData(data);
       firebase.database().ref().set(data);
@@ -69,6 +71,7 @@ function getCrimeDataDateAndCode(date, crmCD) {
         "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
         }
     }).done(function(data) {
+        results = data;
         alert("Retrieved " + data.length + " records from the dataset!");
         mapCrimeData(data);
         firebase.database().ref().set(data);
@@ -82,16 +85,15 @@ function mapCrimeData(data) {
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
     var marker = L.marker([lat, lon]);
+    marker.alt = i;
     marker.on("click", function() {
-        displayCrimeData(i);
+        var newDiv = $('<div>');
+        newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
+        $('#stats').prepend(newDiv);
     });
     marker.addTo(markers);
   }
   markers.addTo(map);
-}
-
-function displayCrimeData(i) {
-    var location;
 }
 
 $('.dropdown-trigger').dropdown();
@@ -99,12 +101,16 @@ $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
 
 
-var text = $('#dropDownMenu').find('option:selected').val();
+console.log($('#myselect').val());
 
-$("#dropDownMenu").on('click', function(){
-console.log(text);
 
-})
+
+$('#dropDownMenu').change(function(){
+    console.log($(this).find(':selected').text());
+    console.log($(this).find(':selected').val());
+});
+
+
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
 M.textareaAutoResize($('#textarea1'));
