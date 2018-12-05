@@ -20,8 +20,7 @@ function handleUserInput(code, date) {
     getCrimeDataDateAndCode(date, code);
   }
   else if(date !== "" && date !== undefined && date !== null) {
-    console.log(date);
-    getCrimeDataDate(date);
+      getCrimeDataDate(date);
   }
   else if(code > 0) {
     getCrimeDataCrime(code);
@@ -99,6 +98,9 @@ function getCrimeDataDateAndCode(date, crmCD) {
 
 
 function mapCrimeData(data) {
+  if(markers !== null && markers !== undefined) {
+    markers.clearLayers();
+  }
   markers = L.layerGroup([]);
   for(var i=0; i<data.length; i++) {
     var lat = data[i]["location_1"]["coordinates"][1];
@@ -108,7 +110,7 @@ function mapCrimeData(data) {
     marker.on("click", function() {
         var newDiv = $('<div>');
         newDiv.html("Location: " + data[this.alt]["location"] + "<br>Crime: " + data[this.alt]["crm_cd_desc"] + "<br>");
-        $('#stats').prepend(newDiv);
+        $('#stats').append(newDiv);
     });
     marker.addTo(markers);
   }
