@@ -139,6 +139,7 @@ function getCrimeDataDateAndCode(date, crmCD) {
         results = data;
         //callback function with data. pass data to map function
         mapCrimeData(data);
+        console.log(data)
     });
 }
 
@@ -166,6 +167,8 @@ function mapCrimeData(data) {
       newDiv.html("Area Name: " + data[this.alt]["area_name"]
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+      + "<br>Crime Code: " + data[this.alt]["crm_desc"] 
+      + "<br>Premise Description: " + data[this.alt]["crm_cd_desc"] 
       + "<br> ");
       //add to div
       $('#stats').prepend(newDiv);
