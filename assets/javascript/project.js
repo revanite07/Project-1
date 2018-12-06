@@ -11,7 +11,7 @@ $(document).ready(function() {
     $('.datepicker').datepicker();
     //add click event to submit button
     $('#userInput').click(function() {
-      //get the date and format it into proper formal
+      //get the date and format it into proper formals
       var date = formatUserInputDate($('.datepicker').val());
       //get crime code value
       var code = $('#dropDownMenu option:selected').val();
@@ -25,8 +25,9 @@ $(document).ready(function() {
 });
 
 //function to handle user input and determine correct function for use
-//input of crime code and date
+//input of crime csode and date
 function handleUserInput(code, date) {
+  console.log(date);
   //if crime code is greater than or equal to 0(valid crime code) and date is not undefined or null
   if(code >= 0 && date !== "" && date !== undefined && date !== null) {
     //use function that uses ajax both parameters
@@ -34,6 +35,7 @@ function handleUserInput(code, date) {
   }
   //one or the other is valid. if date is valid do ajax with date
   else if(date !== "" && date !== undefined && date !== null) {
+    console.log("hi");
     getCrimeDataDate(date);
   }
   //if crime code is valid, do ajax with crime code
@@ -60,6 +62,24 @@ function initializeMap() {
       maxZoom: 18
   }).addTo(map);//Finally add layer to map
 }
+// function to check if a crime and date was selected
+function handleUserInput(code, date) {
+  
+  // both are selected
+  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+    getCrimeDataDateAndCode(date, code);
+  }//if a date was the only thing selected
+  else if(date !== "" && date !== undefined && date !== null) {
+      getCrimeDataDate(date);
+  }
+  else if(code > 0) {
+    getCrimeDataCrime(code);
+  }
+  else {
+    alert("Error");
+  }
+}
+
 
 //function to format user input date using moment.js
 //input parameter is a string that is obtained using materialize's datepicker
@@ -85,7 +105,7 @@ function getCrimeDataDate(date) {
     data: {
       "$limit" : 500,
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
-    }
+    }//once ajax is called run the map crime data function
   }).done(function(data) {
     //callback function with data. pass data to map function
     mapCrimeData(data);
