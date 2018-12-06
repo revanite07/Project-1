@@ -37,10 +37,12 @@ h2 {
 }
 
 .dessert {
+ border-radius: 50%;
  float:left;
 }
 
-#sheriff{
+#sheriff {
+border-radius: 50%;
 margin-bottom: 2%;
 }
 
