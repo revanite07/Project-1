@@ -4,19 +4,26 @@ body,.crimeChoose, .datepicker-day-button {
     font-family: 'Black Ops One', cursive;
     background-color: rgb(216, 215, 215);
 }
-#header {
+
+#header, .page-footer, .datepicker-date-display {
     background-color: rgb(22, 22, 155);
    
+}
 
+.dropdown-content li>span {
+    font-size: 16px;
+    color: rgb(22, 22, 155);
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
 }
-.crime {
-    background-color: rgb(22, 22, 155);
-}
+
 h1 {
     font-size: 35px;
     float: left;
     color: yellow;
 }
+
 img {
     float: right;
 }
@@ -28,22 +35,18 @@ h2 {
     margin-top: -1%;
 }
 
-
-img {
-    float: right;
+.dessert {
+ float:left;
 }
 
 #sheriff{
 margin-bottom: 2%;
 }
 
-.page-footer {
-    background-color: rgb(22, 22, 155);
-}
-
 #map {
     height: 340px;
 }
+
 #stats {
     background-color: rgb(22, 22, 155);
     color: white;
@@ -53,9 +56,11 @@ margin-bottom: 2%;
     margin-left: 1%;
     background-color: rgb(22, 22, 155);
 }
-.datepicker-date-display {
-    background-color: rgb(22, 22, 155);
-}
-.btn-flat {
+
+.btn-flat,.datepicker-table td.is-today {
     color: rgb(22, 22, 155);
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid rgb(22, 22, 155);;
 }

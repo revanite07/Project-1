@@ -24,9 +24,9 @@ dataRef.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", functio
   $("#serach-counter").text(snapshot.val().data[this.alt]["premis_desc"] );
 });
 
-
+// function to initialize leaflet map onto the page
 function initializeMap() {
-  //loads a center of the map
+ //variable map initialized to be a leaflet map with in element 'map' with defined center and zoom. coords using latitude and longitude
   map = L.map('map', {
     center: [34.0522, -118.2437],
     zoom: 13
@@ -39,14 +39,14 @@ function initializeMap() {
 }
 // function to check if a crime and date was selected
 function handleUserInput(code, date) {
-  
-  // both are selected
+   // both are selected
   if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+     //use function that uses ajax both parameters
     getCrimeDataDateAndCode(date, code);
   }//if a date was the only thing selected
   else if(date !== "" && date !== undefined && date !== null) {
       getCrimeDataDate(date);
-  }
+  }//one or the other is valid. if date is valid do ajax with date
   else if(code > 0) {
     getCrimeDataCrime(code);
   }
@@ -55,18 +55,23 @@ function handleUserInput(code, date) {
   }
 }
 
-
+//function to format user input date using moment.js
+//input parameter is a string that is obtained using materialize's datepicker
 function formatUserInputDate(string) {
-  
+  //if string is empty, null, or underdefined then dont do anything
   if(string === "" || string === null) {
     return;
   }
+  //if not then use regular expression to remove non numeric characters and replace with blank space
     string = string.replace(/\D/g,'');
+     //create a moment by parsing string with expected format
     var day = moment(string, "MMM DD YYYY");
     day = day.format('YYYY-MM-DD');
+      //return string
     return day.toString();
 }
 
+//ajax call function using just a date
 function getCrimeDataDate(date) {
   $.ajax({
     url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000",
@@ -75,6 +80,7 @@ function getCrimeDataDate(date) {
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
     }//once ajax is called run the map crime data function
   }).done(function(data) {
+     //callback function with data. pass data to map function
     mapCrimeData(data);
     console.log(data);
     
@@ -94,7 +100,7 @@ function getCrimeDataCrime(crmCD) {
     });
   }
   
-
+//ajax call function using just a crime code
 function getCrimeDataDateAndCode(date, crmCD) {
     $.ajax({
         url: "https://data.lacity.org/resource/7fvc-faax.json?date_occ=" + date + "T00:00:00.000&crm_cd=" + crmCD,
@@ -104,13 +110,14 @@ function getCrimeDataDateAndCode(date, crmCD) {
         }
     }).done(function(data) {
         results = data;
+         //callback function with data. pass data to map function
         mapCrimeData(data);
         console.log(data);
        
     });
 }
 
-
+//ajax call function using both date and crime code
 function mapCrimeData(data) {
   //clears extra markers once a new crime and day are selected
   if(markers !== null && markers !== undefined) {
