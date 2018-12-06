@@ -2,6 +2,20 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
+var searchResults = [];
+
+
+function updateDisplay(){
+  $('#search-counter').empty();
+  for(var i = 0;searchResults.length > i;i++){
+         var newDiv1 = $('<div>');
+        newDiv1.html("Area Name: " + searchResults[i].AreaName
+        + "<br>Location: " + searchResults[i].Location
+        + "<br>Crime: " + searchResults[i].Crime
+        + "<br> ");
+        $('#search-counter').append(newDiv1);
+  }
+}
 
 //Function callback when document is fully loaded
 $(document).ready(function() {
@@ -177,15 +191,6 @@ function mapCrimeData(data) {
       var updates = {};
       //add to firebase using key and data
       updates['/posts/' + newPostKey] = newData;
-      firebase.database().ref('posts').orderByChild('dateAdded').on('child_added', function(childSnapshot){
-        console.log(childSnapshot.val().AreaName)
-        var newDiv1 = $('<div>');
-        newDiv1.html("Area Name: " + childSnapshot.val().AreaName
-        + "<br>Location: " + childSnapshot.val().Location
-        + "<br>Crime: " + childSnapshot.val().Crime
-        + "<br> ");
-        $('#search-counter').prepend(newDiv1);
-      });
       
     });
     marker.addTo(markers);
@@ -195,6 +200,17 @@ function mapCrimeData(data) {
  
 
 
+firebase.database().ref('posts').on('child_added', function(childSnapshot){
+  if(searchResults.length > 5){
+    searchResults.pop()
+    searchResults.unshift(childSnapshot.val())
+  } else {
+    searchResults.unshift(childSnapshot.val())
+  }
+  console.log(searchResults); 
+  updateDisplay();
+
+}); 
 
 
 
