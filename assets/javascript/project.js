@@ -2,7 +2,20 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
-var commentsRef = firebase.database().ref("posts");
+var searchResults = [];
+
+
+function updateDisplay(){
+  $('#search-counter').empty();
+  for(var i = 0;searchResults.length > i;i++){
+         var newDiv1 = $('<div>');
+        newDiv1.html("Area Name: " + searchResults[i].AreaName
+        + "<br>Location: " + searchResults[i].Location
+        + "<br>Crime: " + searchResults[i].Crime
+        + "<br> ");
+        $('#search-counter').append(newDiv1);
+  }
+}
 
 //Function callback when document is fully loaded
 $(document).ready(function() {
@@ -78,8 +91,6 @@ function handleUserInput(code, date) {
 }
 
 
-//function to format user input date using moment.js
-//input parameter is a string that is obtained using materialize's datepicker
 function formatUserInputDate(string) {
   //if string is empty, null, or underdefined then dont do anything
   if(string === "" || string === null || string === undefined) {
@@ -148,13 +159,10 @@ function mapCrimeData(data) {
   markers = L.layerGroup([]);
   //for all results in response
   for(var i=0; i<data.length; i++) {
-    //create marker with center using coordinates from results in response
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
     var marker = L.marker([lat, lon]);
-    //store number of result in alt of marker
     marker.alt = i;
-    //add on click event for the markers
     marker.on("click", function() {
       //create a div with text from data
       //Change this part here
@@ -178,18 +186,28 @@ function mapCrimeData(data) {
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       } ;
       //generate a unique post key for the data
-      var newPostKey = firebase.database().ref().child('posts').push().key;
+      var newPostKey = firebase.database().ref('posts').push(newData).key;
       var updates = {};
       //add to firebase using key and data
       updates['/posts/' + newPostKey] = newData;
-      database.update(updates);
+      
     });
     marker.addTo(markers);
   }
   markers.addTo(map);
 }
+ 
 
 
+firebase.database().ref('posts').on('child_added', function(childSnapshot){
+  if(searchResults.length > 5){
+    searchResults.pop()
+    searchResults.unshift(childSnapshot.val())
+  } else {
+    searchResults.unshift(childSnapshot.val())
+  }
+  updateDisplay();
+}); 
 
 
 
