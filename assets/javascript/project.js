@@ -2,6 +2,20 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
+var searchResults = [];
+
+
+function updateDisplay(){
+  $('#search-counter').empty();
+  for(var i = 0;searchResults.length > i;i++){
+         var newDiv1 = $('<div>');
+        newDiv1.html("Area Name: " + searchResults[i].AreaName
+        + "<br>Location: " + searchResults[i].Location
+        + "<br>Crime: " + searchResults[i].Crime
+        + "<br> ");
+        $('#search-counter').append(newDiv1);
+  }
+}
 
 //Function callback when document is fully loaded
 $(document).ready(function() {
@@ -11,15 +25,12 @@ $(document).ready(function() {
     $('.datepicker').datepicker();
     //add click event to submit button
     $('#userInput').click(function() {
-      //get the date and format it into proper formal
+      //get the date and format it into proper formals
       var date = formatUserInputDate($('.datepicker').val());
       //get crime code value
       var code = $('#dropDownMenu option:selected').val();
       //call function designed to handle input and determine which function to use
       handleUserInput(code, date);
-      
-
-
     });
     //confusion
     database.orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {
@@ -28,15 +39,14 @@ $(document).ready(function() {
 });
 
 //function to handle user input and determine correct function for use
-//input of crime code and date
+//input of crime csode and date
 function handleUserInput(code, date) {
-  //if crime code is greater than or equal to 0(valid crime code) and date is not undefined or null
-  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+  if(code >= 0 && date !== undefined) {
     //use function that uses ajax both parameters
     getCrimeDataDateAndCode(date, code);
   }
   //one or the other is valid. if date is valid do ajax with date
-  else if(date !== "" && date !== undefined && date !== null) {
+  else if(date !== undefined) {
     getCrimeDataDate(date);
   }
   //if crime code is valid, do ajax with crime code
@@ -152,13 +162,10 @@ function mapCrimeData(data) {
   markers = L.layerGroup([]);
   //for all results in response
   for(var i=0; i<data.length; i++) {
-    //create marker with center using coordinates from results in response
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
     var marker = L.marker([lat, lon]);
-    //store number of result in alt of marker
     marker.alt = i;
-    //add on click event for the markers
     marker.on("click", function() {
       //create a div with text from data
       //Change this part here
@@ -186,7 +193,7 @@ function mapCrimeData(data) {
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       } ;
       //generate a unique post key for the data
-      var newPostKey = firebase.database().ref().child('posts').push().key;
+      var newPostKey = firebase.database().ref('posts').push(newData).key;
       var updates = {};
       //add to firebase using key and data
       updates['/posts/' + newPostKey] = newData;
@@ -198,21 +205,20 @@ function mapCrimeData(data) {
   }
   markers.addTo(map);
 }
+ 
 
-// $('#userInput').click(function() {
-//   var crime = $('select option:selected').val();
-//     $("#stats").append("<p>" + crime + "</p>");
-   
-//     console.log($('select option:selected').val());
-//     console.log(crime);
-//   })
-//   $('.dropdown-trigger').dropdown();
-//   $('#textarea1').val('');
-//   M.textareaAutoResize($('#textarea1'));
-//   function displayCrimeData(data) {
-//       var crimeDataDiv = $('#stats');
-//       var crmCD = $('select option:selected').val();
-//       function displayCrimeData(i) {
-//       var location;
-  // }
-  // }
+
+firebase.database().ref('posts').on('child_added', function(childSnapshot){
+  if(searchResults.length > 5){
+    searchResults.pop()
+    searchResults.unshift(childSnapshot.val())
+  } else {
+    searchResults.unshift(childSnapshot.val())
+  }
+  console.log(searchResults); 
+  updateDisplay();
+
+}); 
+
+
+
