@@ -2,12 +2,12 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
-
+//loads the map dropdown and calender
 $(document).ready(function() {
     initializeMap();
     $('select').formSelect();
     $('.datepicker').datepicker();
-  
+  //when user clicks on submit it grabs the dropdown menu selection. takes the date data from calender
     $('#userInput').click(function() {
       var date = formatUserInputDate($('.datepicker').val());
       var code = $('#dropDownMenu option:selected').val();
@@ -19,20 +19,24 @@ $(document).ready(function() {
 
 
 function initializeMap() {
+  //loads a center of the map
   map = L.map('map', {
     center: [34.0522, -118.2437],
     zoom: 13
   });
+ // takes the map info from the api
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
       maxZoom: 18
   }).addTo(map);
 }
-
+// function to check if a crime and date was selected
 function handleUserInput(code, date) {
+  
+  // both are selected
   if(code >= 0 && date !== "" && date !== undefined && date !== null) {
     getCrimeDataDateAndCode(date, code);
-  }
+  }//if a date was the only thing selected
   else if(date !== "" && date !== undefined && date !== null) {
       getCrimeDataDate(date);
   }
@@ -46,6 +50,7 @@ function handleUserInput(code, date) {
 
 
 function formatUserInputDate(string) {
+  
   if(string === "" || string === null) {
     return;
   }
@@ -61,7 +66,7 @@ function getCrimeDataDate(date) {
     data: {
       "$limit" : 500,
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
-    }
+    }//once ajax is called run the map crime data function
   }).done(function(data) {
     mapCrimeData(data);
     console.log(data);
@@ -100,10 +105,12 @@ function getCrimeDataDateAndCode(date, crmCD) {
 
 
 function mapCrimeData(data) {
+  //clears extra markers once a new crime and day are selected
   if(markers !== null && markers !== undefined) {
     markers.clearLayers();
   }
   markers = L.layerGroup([]);
+  //loop through the data from the ajax and places it onto the map
   for(var i=0; i<data.length; i++) {
     var lat = data[i]["location_1"]["coordinates"][1];
     var lon = data[i]["location_1"]["coordinates"][0];
@@ -115,7 +122,6 @@ function mapCrimeData(data) {
     newDiv.html("Area Name: " + data[this.alt]["area_name"]
     + "<br>Location: " + data[this.alt]["location"] 
     + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
-    + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
     + "<br>Premise Description: " + data[this.alt]["premis_desc"] 
     + "<br><br><br> ");
     $('#stats').html(newDiv);

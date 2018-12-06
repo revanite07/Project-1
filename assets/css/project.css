@@ -1,4 +1,4 @@
-body,.crimeChoose {
+body,.crimeChoose, .datepicker-day-button {
     font-family: 'Chakra Petch', sans-serif;
     font-family: 'Rock Salt', cursive;
     font-family: 'Black Ops One', cursive;
@@ -9,6 +9,9 @@ body,.crimeChoose {
    
 
 }
+.crime {
+    background-color: rgb(22, 22, 155);
+}
 h1 {
     font-size: 35px;
     float: left;
@@ -18,10 +21,12 @@ img {
     float: right;
 }
 
-h1 {
-    font-size: 40px;
+h2 {
+    color: yellow;
+    font-size: 20px;
     float: left;
 }
+
 
 img {
     float: right;
@@ -45,4 +50,10 @@ margin-bottom: 2%;
 #userInput {
     margin-left: 1%;
     background-color: rgb(22, 22, 155);
+}
+.datepicker-date-display {
+    background-color: rgb(22, 22, 155);
+}
+.btn-flat {
+    color: rgb(22, 22, 155);
 }
