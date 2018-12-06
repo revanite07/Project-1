@@ -169,8 +169,7 @@ function mapCrimeData(data) {
     marker.on("click", function() {
       //create a div with text from data
       //Change this part here
-      var newDiv = $('<div>');
-      newDiv.html("Area Name: " + data[this.alt]["area_name"]
+      $('#stats').html("Area Name: " + data[this.alt]["area_name"]
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
       + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
