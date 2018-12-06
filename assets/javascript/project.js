@@ -134,8 +134,9 @@ function mapCrimeData(data) {
     //Change this part here
     var newDiv = $('<div>');
     newDiv.html("Area Name: " + data[this.alt]["area_name"]
-    + "<br>Location: " + data[this.alt]["location"] 
-    + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+    + "<br>Location: " + data[this.alt]["location"]
+    + "<br>Crime Code: " + data[this.alt]["crm_cd"]  
+    + "<br>Crime: " + data[this.alt]["crm_cd_desc"]
     + "<br>Premise Description: " + data[this.alt]["premis_desc"] 
     + "<br><br><br> ");
     $('#stats').html(newDiv);
