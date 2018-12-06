@@ -182,7 +182,7 @@ function mapCrimeData(data) {
       var updates = {};
       //add to firebase using key and data
       updates['/posts/' + newPostKey] = newData;
-      firebase.database().ref().update(updates);
+      database.update(updates);
     });
     marker.addTo(markers);
   }
