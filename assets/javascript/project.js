@@ -63,6 +63,24 @@ function initializeMap() {
       maxZoom: 18
   }).addTo(map);//Finally add layer to map
 }
+// function to check if a crime and date was selected
+function handleUserInput(code, date) {
+  
+  // both are selected
+  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+    getCrimeDataDateAndCode(date, code);
+  }//if a date was the only thing selected
+  else if(date !== "" && date !== undefined && date !== null) {
+      getCrimeDataDate(date);
+  }
+  else if(code > 0) {
+    getCrimeDataCrime(code);
+  }
+  else {
+    alert("Error");
+  }
+}
+
 
 //function to format user input date using moment.js
 //input parameter is a string that is obtained using materialize's datepicker
@@ -88,7 +106,7 @@ function getCrimeDataDate(date) {
     data: {
       "$limit" : 500,
       "$$app_token" : "fNjQDblxyyhoI1YrUgCkAQj6Y"
-    }
+    }//once ajax is called run the map crime data function
   }).done(function(data) {
     //callback function with data. pass data to map function
     mapCrimeData(data);
