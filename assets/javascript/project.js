@@ -65,14 +65,14 @@ function initializeMap() {
 }
 // function to check if a crime and date was selected
 function handleUserInput(code, date) {
-  
-  // both are selected
+   // both are selected
   if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+     //use function that uses ajax both parameters
     getCrimeDataDateAndCode(date, code);
   }//if a date was the only thing selected
   else if(date !== "" && date !== undefined && date !== null) {
       getCrimeDataDate(date);
-  }
+  }//one or the other is valid. if date is valid do ajax with date
   else if(code > 0) {
     getCrimeDataCrime(code);
   }
@@ -80,7 +80,6 @@ function handleUserInput(code, date) {
     alert("Error");
   }
 }
-
 
 //function to format user input date using moment.js
 //input parameter is a string that is obtained using materialize's datepicker
@@ -167,11 +166,13 @@ function mapCrimeData(data) {
       newDiv.html("Area Name: " + data[this.alt]["area_name"]
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
-      + "<br>Crime Code: " + data[this.alt]["crm_desc"] 
-      + "<br>Premise Description: " + data[this.alt]["crm_cd_desc"] 
+      + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
+      + "<br>Premise Description: " + data[this.alt]["premis_desc"] 
       + "<br> ");
       //add to div
-      $('#stats').prepend(newDiv);
+      $('#stats').html(newDiv);
+
+     
       //create a data object to be added to firebase
       var newData = {
         AreaName: data[this.alt]["area_name"],
@@ -190,6 +191,8 @@ function mapCrimeData(data) {
       //add to firebase using key and data
       updates['/posts/' + newPostKey] = newData;
       firebase.database().ref().update(updates);
+
+      
     });
     marker.addTo(markers);
   }
