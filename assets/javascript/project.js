@@ -15,7 +15,14 @@ $(document).ready(function() {
     });
 });
 
-
+dataRef.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {
+  // Change the HTML to reflect
+  $("#serach-counter").text(snapshot.val().data[this.alt]["area_name"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["location"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd_desc"]);
+  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd"] );
+  $("#serach-counter").text(snapshot.val().data[this.alt]["premis_desc"] );
+});
 
 
 function initializeMap() {
@@ -146,15 +153,6 @@ function mapCrimeData(data) {
   }
   markers.addTo(map);
 }
-dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
-  // Change the HTML to reflect
-  $("#serach-counter").text(snapshot.val().data[this.alt]["area_name"]);
-  $("#serach-counter").text(snapshot.val().data[this.alt]["location"]);
-  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd_desc"]);
-  $("#serach-counter").text(snapshot.val().data[this.alt]["crm_cd"] );
-  $("#serach-counter").text(snapshot.val().data[this.alt]["premis_desc"] );
-});
-
 
 $('.dropdown-trigger').dropdown();
 $('#textarea1').val('');
