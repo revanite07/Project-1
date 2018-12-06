@@ -2,6 +2,7 @@ var map;
 var markers;
 var inputDate;
 var database = firebase.database().ref();
+var commentsRef = firebase.database().ref("posts");
 
 //Function callback when document is fully loaded
 $(document).ready(function() {
@@ -19,10 +20,9 @@ $(document).ready(function() {
       handleUserInput(code, date);
     });
     //confusion
-    database.orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {
-      // Change the HTML to reflect
-    });
 });
+
+
 
 //function to handle user input and determine correct function for use
 //input of crime csode and date
