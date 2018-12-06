@@ -27,15 +27,12 @@ $(document).ready(function() {
 //function to handle user input and determine correct function for use
 //input of crime csode and date
 function handleUserInput(code, date) {
-  console.log(date);
-  //if crime code is greater than or equal to 0(valid crime code) and date is not undefined or null
-  if(code >= 0 && date !== "" && date !== undefined && date !== null) {
+  if(code >= 0 && date !== undefined) {
     //use function that uses ajax both parameters
     getCrimeDataDateAndCode(date, code);
   }
   //one or the other is valid. if date is valid do ajax with date
-  else if(date !== "" && date !== undefined && date !== null) {
-    console.log("hi");
+  else if(date !== undefined) {
     getCrimeDataDate(date);
   }
   //if crime code is valid, do ajax with crime code
