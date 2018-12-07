@@ -172,7 +172,6 @@ function mapCrimeData(data) {
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
       + "<br> ");
       //add to div
-      $('#stats').prepend(newDiv);
       //create a data object to be added to firebase
       var newData = {
         AreaName: data[this.alt]["area_name"],
