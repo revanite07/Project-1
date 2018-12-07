@@ -4,7 +4,7 @@ var inputDate;
 var database = firebase.database().ref();
 var searchResults = [];
 
-
+// Updates the display to show the new firebase searches
 function updateDisplay(){
   $('#search-counter').empty();
   for(var i = 0;searchResults.length > i;i++){
@@ -198,7 +198,7 @@ function mapCrimeData(data) {
 }
  
 
-
+// Calls firebase data and displays it on the page
 firebase.database().ref('posts').on('child_added', function(childSnapshot){
   if(searchResults.length > 5){
     searchResults.pop()
