@@ -171,7 +171,6 @@ function mapCrimeData(data) {
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
       + "<br> ");
-      //add to div
       //create a data object to be added to firebase
       var newData = {
         AreaName: data[this.alt]["area_name"],
