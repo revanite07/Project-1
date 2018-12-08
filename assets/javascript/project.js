@@ -3,8 +3,7 @@ var markers;
 var inputDate;
 var database = firebase.database().ref();
 var searchResults = [];
-
-
+// Updates the display to show the new firebase searches
 function updateDisplay(){
   $('#search-counter').empty();
   for(var i = 0;searchResults.length > i;i++){
@@ -16,7 +15,6 @@ function updateDisplay(){
         $('#search-counter').append(newDiv1);
   }
 }
-
 //Function callback when document is fully loaded
 $(document).ready(function() {
     initializeMap();
@@ -34,9 +32,6 @@ $(document).ready(function() {
     });
     //confusion
 });
-
-
-
 //function to handle user input and determine correct function for use
 //input of crime csode and date
 function handleUserInput(code, date) {
@@ -57,7 +52,6 @@ function handleUserInput(code, date) {
     alert("Error");
   }
 }
-
 //function to initialize leaflet map on screen
 function initializeMap() {
   //variable map initialized to be a leaflet map with in element 'map' with defined center and zoom. coords using latitude and longitude
@@ -89,8 +83,6 @@ function handleUserInput(code, date) {
     alert("Error");
   }
 }
-
-
 function formatUserInputDate(string) {
   //if string is empty, null, or underdefined then dont do anything
   if(string === "" || string === null || string === undefined) {
@@ -105,7 +97,6 @@ function formatUserInputDate(string) {
   //return string
   return day.toString();
 }
-
 //ajax call function using just a date
 function getCrimeDataDate(date) {
   $.ajax({
@@ -119,7 +110,6 @@ function getCrimeDataDate(date) {
     mapCrimeData(data);
   });
 }
-
 //ajax call function using just a crime code
 function getCrimeDataCrime(crmCD) {
     $.ajax({
@@ -148,7 +138,6 @@ function getCrimeDataDateAndCode(date, crmCD) {
         mapCrimeData(data);
     });
 }
-
 //function to make markers on leaflet map using response data
 function mapCrimeData(data) {
   //if layer of markers already exists clear layer of markers
@@ -166,13 +155,12 @@ function mapCrimeData(data) {
     marker.on("click", function() {
       //create a div with text from data
       //Change this part here
-      var newDiv = $('<div>');
-      newDiv.html("Area Name: " + data[this.alt]["area_name"]
+      $('#stats').html("Area Name: " + data[this.alt]["area_name"]
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+      + "<br>Crime Code: " + data[this.alt]["crm_cd"] 
+      + "<br>Premise Description: " + data[this.alt]["prem_desc"] 
       + "<br> ");
-      //add to div
-      $('#stats').prepend(newDiv);
       //create a data object to be added to firebase
       var newData = {
         AreaName: data[this.alt]["area_name"],
@@ -197,8 +185,7 @@ function mapCrimeData(data) {
   markers.addTo(map);
 }
  
-
-
+// Calls firebase data and displays it on the page
 firebase.database().ref('posts').on('child_added', function(childSnapshot){
   if(searchResults.length > 5){
     searchResults.pop()
