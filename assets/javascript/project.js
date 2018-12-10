@@ -8,11 +8,12 @@ var searchResults = [];
 function updateDisplay(){
   $('#firebase-data').empty();
   for(var i = 0; searchResults.length > i;i++){
-        var newDiv1 = $('<div>');
-        newDiv1.addClass("databaseEntries");
+         var newDiv1 = $('<div>');
         newDiv1.html("Area Name: " + searchResults[i]["AreaName"]
         + "<br>Location: " + searchResults[i]["Location"]
         + "<br>Crime: " + searchResults[i]["Crime"]
+        + "<br>DateOcc: " +  searchResults[i]["date_occ"]
+        + "<br>DateRptd: " + searchResults[i]["date_rptd"]
         + "<br> ");
         $('#firebase-data').append(newDiv1);
   }
