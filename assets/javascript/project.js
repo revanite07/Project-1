@@ -9,9 +9,11 @@ function updateDisplay(){
   $('#firebase-data').empty();
   for(var i = 0; searchResults.length > i;i++){
          var newDiv1 = $('<div>');
-        newDiv1.html("Area Name: " + searchResults[i].AreaName
-        + "<br>Location: " + searchResults[i].Location
-        + "<br>Crime: " + searchResults[i].Crime
+        newDiv1.html("Area Name: " + searchResults[i]["AreaName"]
+        + "<br>Location: " + searchResults[i]["Location"]
+        + "<br>Crime: " + searchResults[i]["Crime"]
+        + "<br>DateOcc: " +  searchResults[i]["date_occ"],
+        + "DateRptd: " + searchResults[i]["date_rptd"]
         + "<br> ");
         $('#firebase-data').append(newDiv1);
   }
@@ -115,6 +117,8 @@ function mapCrimeData(data) {
       newDiv.html("Area Name: " + data[this.alt]["area_name"]
       + "<br>Location: " + data[this.alt]["location"] 
       + "<br>Crime: " + data[this.alt]["crm_cd_desc"] 
+      + "<br>DateOcc: " + data[this.alt]["date_occ"].substring(0, 10)
+      + "<br> DateRptd: " + data[this.alt]["date_rptd"].substring(0, 10)
       + "<br> ");
       $('#stats').empty();
       $('#stats').append(newDiv);
