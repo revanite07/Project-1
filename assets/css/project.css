@@ -10,11 +10,6 @@ body,.crimeChoose, .datepicker-day-button, button, input, optgroup, select, text
    
 }
 
-.databaseEntries {
-    border: 1px solid white;
-    margin-bottom: 5px;
-}
-
 .dropdown-content li>span {
     font-size: 16px;
     color: rgb(22, 22, 155);
