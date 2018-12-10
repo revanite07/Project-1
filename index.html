@@ -34,24 +34,19 @@
     <div class="row">
 
         <div class="input-field col s12">
-            <h2>Choose from the options below to see the dirty deeds of LA</h2>
-        
-                    <input type="text" class="datepicker" value="Choose a Date"style="font-family: 'Chakra Petch', sans-serif;
-                    font-family: 'Rock Salt', cursive;
-                    font-family: 'Black Ops One', cursive; color: rgb(22, 22, 155);">
-                   
-                    <select id="dropDownMenu">
-                        <option value="-1" class="crime" disabled selected>Choose a Crime</option>
-                        <option class="crime" value="624" data="624">Burglary</option>
-                        <option class="crime" value="310" data="310">Battery</option>
-                        <option class="crime" value="510" data="510">Grand Theft Auto</option>
-                        <option class="crime" value="440" data="440">Petty Theft</option>
-                        <option class="crime" value="354" data="354">Identity Theft</option>
-                        <option class="crime" value="230" data="230">Aggravated Assault</option>
-                        <option class="crime" value="210" data="210">Robbery</option>
-                        <option class="crime" value="648" data="648">Arson</option>
-                    </select>
-
+            <h2>Choose from the options below to see crimes of LA</h2>
+            <input type="text" class="datepicker">
+            <select id="dropDownMenu">
+                <option value="-1" class="crimeChoose" disabled selected>Choose Your Crime</option>
+                <option class="crime" value="624" data="624">Burglary</option>
+                <option class="crime" value="310" data="310">Battery</option>
+                <option class="crime" value="510" data="510">Grand Theft Auto</option>
+                <option class="crime" value="440" data="440">Petty Theft</option>
+                <option class="crime" value="354" data="354">Identity Theft</option>
+                <option class="crime" value="230" data="230">Aggravated Assault</option>
+                <option class="crime" value="210" data="210">Robbery</option>
+                <option class="crime" value="648" data="648">Arson</option>
+            </select>
         </div>
 
         <a id="userInput" class="waves-effect waves-light btn-small">Submit</a>
@@ -59,25 +54,22 @@
         </form>
 
         <br><br><br>
-        <h2>Choose a marker below to see the crime data</h2> <br><br>
 
         <div id="map"></div>
 
         <div class="row">
             <div class="col s12 m6">
                 <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                        <span class="card-title">Crime Stats</span>
-                        <div id="stats">Different Crime Stats underneath the map</div>
+                    <span class="card-title">Crime Stats</span>
+                    <div id="stats" class="card-content white-text">
                     </div>
                 </div>
             </div>
 
             <div class="col s12 m6">
                 <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                        <span class="card-title">Most Recent Searches</span>
-                        <div id='search-counter'></div>
+                    <span class="card-title">Most Recent Searches</span>
+                    <div id="firebase-data" class="card-content white-text">
                     </div>
                 </div>
             </div>
@@ -85,7 +77,6 @@
 
         <footer class="page-footer">
             <div class="container">
-                <img src="assets/images/original.jpg" class="dessert" height="100" width="120">
                 <div class="row">
 
                     <div class="col l6 s12">
