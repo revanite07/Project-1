@@ -12,8 +12,8 @@ function updateDisplay(){
         newDiv1.html("Area Name: " + searchResults[i]["AreaName"]
         + "<br>Location: " + searchResults[i]["Location"]
         + "<br>Crime: " + searchResults[i]["Crime"]
-        + "<br>DateOcc: " +  searchResults[i]["date_occ"],
-        + "DateRptd: " + searchResults[i]["date_rptd"]
+        + "<br>DateOcc: " +  searchResults[i]["date_occ"]
+        + "<br>DateRptd: " + searchResults[i]["date_rptd"]
         + "<br> ");
         $('#firebase-data').append(newDiv1);
   }
