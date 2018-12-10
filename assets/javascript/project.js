@@ -8,7 +8,8 @@ var searchResults = [];
 function updateDisplay(){
   $('#firebase-data').empty();
   for(var i = 0; searchResults.length > i;i++){
-         var newDiv1 = $('<div>');
+        var newDiv1 = $('<div>');
+        newDiv1.addClass("databaseEntries");
         newDiv1.html("Area Name: " + searchResults[i]["AreaName"]
         + "<br>Location: " + searchResults[i]["Location"]
         + "<br>Crime: " + searchResults[i]["Crime"]
